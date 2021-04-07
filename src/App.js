@@ -26,6 +26,7 @@ const Statistic = ({ type }) => {
 const Statistics = ({ feedback }) => {
   const [good, neutral, bad, all, average, positive] = feedback.statesFeedback;
   return (
+    
     <div>
       <h1>{feedback.titleStatistics}</h1>
       <Statistic type={good} />
