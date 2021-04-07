@@ -1,42 +1,51 @@
 import React, { useState } from "react";
 
-const Button = ({ type }) => {
-  const { handleClick, text } = type;
+const Button = ({ stat }) => {
+  const { handleClick, text } = stat;
   return <button onClick={handleClick}>{text}</button>;
 };
 const Buttons = ({ feedback }) => {
   const [good, neutral, bad] = feedback.statesFeedback;
   return (
     <div>
-      <Button type={good} />
-      <Button type={neutral} />
-      <Button type={bad} />
+      <Button stat={good} />
+      <Button stat={neutral} />
+      <Button stat={bad} />
     </div>
   );
 };
 
-const Statistic = ({ type }) => {
-  const { text, value } = type;
+const Statistic = ({ stat }) => {
+  const { text, value } = stat;
+  let paragraph = text ==="positive"?`${text}: ${value}%`:`${text}: ${value}`
   return (
     <p>
-      {text}: {value}
+      {paragraph}
     </p>
   );
 };
 const Statistics = ({ feedback }) => {
   const [good, neutral, bad, all, average, positive] = feedback.statesFeedback;
-  return (
-    
-    <div>
-      <h1>{feedback.titleStatistics}</h1>
-      <Statistic type={good} />
-      <Statistic type={neutral} />
-      <Statistic type={bad} />
-      <Statistic type={all} />
-      <Statistic type={average} />
-      <Statistic type={positive} />
-    </div>
-  );
+  if (all.value > 0) {
+    return (
+      <div>
+        <h1>{feedback.titleStatistics}</h1>
+        <Statistic stat={good} />
+        <Statistic stat={neutral} />
+        <Statistic stat={bad} />
+        <Statistic stat={all} />
+        <Statistic stat={average} />
+        <Statistic stat={positive} />
+      </div>
+    ); 
+  } else {
+    return (
+      <div>
+        <h1>{feedback.titleStatistics}</h1>
+        <p>no given feedback</p>
+      </div>
+    );
+  }
 };
 
 const Header = ({ feedback }) => <h1>{feedback.titleHeader}</h1>;
@@ -62,7 +71,7 @@ const App = () => {
           setStats({
             all: stats.all + 1,
             average: (stats.all + 1) / 3,
-            positive: (100 / (stats.all + 1)) * good,
+            positive:(100*(good+1))/(stats.all+1)
           });
           setGood(good + 1);
         },
@@ -74,7 +83,7 @@ const App = () => {
           setStats({
             all: stats.all + 1,
             average: (stats.all + 1) / 3,
-            positive: (100 / (stats.all + 1)) * good,
+            positive:(100*(good))/(stats.all+1)
           });
           setNeutral(neutral + 1);
         },
@@ -86,7 +95,7 @@ const App = () => {
           setStats({
             all: stats.all + 1,
             average: (stats.all + 1) / 3,
-            positive: (100 / (stats.all + 1)) * good,
+            positive:(100*(good))/(stats.all+1)
           });
           setBad(bad + 1);
         },
