@@ -25,12 +25,12 @@ const Statistic = ({ stat }) => {
   );
 };
 const Statistics = ({ feedback }) => {
-  const [good, neutral, bad, all, average, positive] = feedback.statesFeedback;
+  const [good, neutral, bad, all, average, positive] = feedback.statesFeedback; 
   if (all.value > 0) {
     return (
       <div>
         <h1>{feedback.titleStatistics}</h1>
-        <Statistic stat={good} />
+        <Statistic stat={good} /> 
         <Statistic stat={neutral} />
         <Statistic stat={bad} />
         <Statistic stat={all} />
