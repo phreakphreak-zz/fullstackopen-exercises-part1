@@ -110,7 +110,7 @@ const App = () => {
       },
       {
         text: "positive",
-        value: stats.positive,
+        value: stats.positive.toFixed(1),
       },
     ],
   };
