@@ -15,11 +15,11 @@ const Part = (props) => {
 const Content = (props) => {
   const { parts, exercises } = props;
   return (
-    <React.Fragment>
+    <div>
       <Part part={parts.p1} exercises={exercises.e1} />
       <Part part={parts.p2} exercises={exercises.e2} />
       <Part part={parts.p3} exercises={exercises.e3} />
-    </React.Fragment>
+    </div>
   );
 };
 const Total = (props) => {
@@ -44,7 +44,7 @@ const App = () => {
 
   return (
     <div>
-      <Header course={course} />
+      <Header course={course} /> 
       <Content parts={parts} exercises={exercises} />
       <Total exercises={exercises} />
     </div>
