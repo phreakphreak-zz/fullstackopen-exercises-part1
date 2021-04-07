@@ -19,18 +19,21 @@ const Statistic = ({ type }) => {
   const { text, value } = type;
   return (
     <p>
-      {text} {value}
+      {text}: {value}
     </p>
   );
 };
 const Statistics = ({ feedback }) => {
-  const [good, neutral, bad] = feedback.statesFeedback;
+  const [good, neutral, bad, all, average, positive] = feedback.statesFeedback;
   return (
     <div>
       <h1>{feedback.titleStatistics}</h1>
       <Statistic type={good} />
       <Statistic type={neutral} />
       <Statistic type={bad} />
+      <Statistic type={all} />
+      <Statistic type={average} />
+      <Statistic type={positive} />
     </div>
   );
 };
@@ -38,9 +41,15 @@ const Statistics = ({ feedback }) => {
 const Header = ({ feedback }) => <h1>{feedback.titleHeader}</h1>;
 
 const App = () => {
+  const [stats, setStats] = useState({
+    all: 0,
+    average: 0,
+    positive: 0,
+  });
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+
   const feedback = {
     titleHeader: "Give Feedback",
     titleStatistics: "Statistics",
@@ -48,17 +57,50 @@ const App = () => {
       {
         text: "good",
         value: good,
-        handleClick: () => setGood(good + 1),
+        handleClick: () => {
+          setStats({
+            all: stats.all + 1,
+            average: (stats.all + 1) / 3,
+            positive: (100 / (stats.all + 1)) * good,
+          });
+          setGood(good + 1);
+        },
       },
       {
         text: "neutral",
         value: neutral,
-        handleClick: () => setNeutral(neutral + 1),
+        handleClick: () => {
+          setStats({
+            all: stats.all + 1,
+            average: (stats.all + 1) / 3,
+            positive: (100 / (stats.all + 1)) * good,
+          });
+          setNeutral(neutral + 1);
+        },
       },
       {
         text: "bad",
         value: bad,
-        handleClick: () => setBad(bad + 1),
+        handleClick: () => {
+          setStats({
+            all: stats.all + 1,
+            average: (stats.all + 1) / 3,
+            positive: (100 / (stats.all + 1)) * good,
+          });
+          setBad(bad + 1);
+        },
+      },
+      {
+        text: "all",
+        value: stats.all,
+      },
+      {
+        text: "average",
+        value: stats.average,
+      },
+      {
+        text: "positive",
+        value: stats.positive,
       },
     ],
   };
