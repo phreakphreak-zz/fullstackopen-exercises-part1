@@ -1,28 +1,52 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+const Header = (props) => {
+  return <h1>{props.course}</h1>;
+};
+const Part = (props) => {
+  return (
+    <p>
+      {props.part} {props.exercises}
+    </p>
+  );
+};
+
+const Content = (props) => {
+  const { parts, exercises } = props;
+  return (
+    <React.Fragment>
+      <Part part={parts.p1} exercises={exercises.e1} />
+      <Part part={parts.p2} exercises={exercises.e2} />
+      <Part part={parts.p3} exercises={exercises.e3} />
+    </React.Fragment>
+  );
+};
+const Total = (props) => {
+  const { exercises } = props;
+  return (
+    <p>Number of exercises {exercises.e1 + exercises.e2 + exercises.e3}</p>
+  );
+};
+
 const App = () => {
   const course = "Half Stack application development";
-  const part1 = "Fundamentals of React";
-  const exercises1 = 10;
-  const part2 = "Using props to pass data";
-  const exercises2 = 7;
-  const part3 = "State of a component";
-  const exercises3 = 14;
+  const parts = {
+    p1: "Fundamentals of React",
+    p2: "Using props to pass data",
+    p3: "State of a component",
+  };
+  const exercises = {
+    e1: 10,
+    e2: 7,
+    e3: 14,
+  };
 
   return (
     <div>
-      <h1>{course}</h1>
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <Header course={course} />
+      <Content parts={parts} exercises={exercises} />
+      <Total exercises={exercises} />
     </div>
   );
 };
