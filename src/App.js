@@ -74,6 +74,7 @@ const App = () => {
       {/* exercises 1.13 */}
       <Button text={"vote"} handlerClick={handlerClickVotes} />
       <Button text={"next phrase"} handlerClick={handlerClickSelected} />
+      {/* exercises 1.14 */}
       <Anecdote
         title={"Anecdote with most votes"}
         text={anecdoteMostVotes.text}
